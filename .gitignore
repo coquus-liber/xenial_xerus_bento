@@ -1,0 +1,6 @@
+
+.vagrant/
+*~
+.*.sw*
+nodes/vagrant-*.json
+
