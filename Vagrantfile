@@ -1,3 +1,12 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+vagrant_root = File.dirname(__FILE__)
+
+def home
+  @home ||= ENV.fetch("HOME").tr("\\", "/")
+end
+
 Vagrant.configure("2") do |config|
   config.vm.box = "bento/ubuntu-18.04"
 
@@ -30,25 +39,16 @@ Vagrant.configure("2") do |config|
       '--type', 'dvddrive',
       '--medium', 'emptydrive'] # 'additions' ?
   end
+  
+  ## Copy generated ssh id_rsa certs
+  config.vm.provision :file, source: "#{home}/.ssh/id_rsa", destination: "/home/vagrant/.ssh/id_rsa", run: "always"
+  config.vm.provision :file, source: "#{home}/.ssh/id_rsa.pub", destination: "/home/vagrant/.ssh/id_rsa.pub", run: "always"
+  config.vm.provision 'shell', privileged: false, inline: "chmod go-rwx .ssh/id_*", run: "always"
 
+  config.vm.provision :file, source: "#{home}/.gitconfig", destination: "/home/vagrant/.gitconfig", run: "always"
 
-  config.vm.provision "chef_zero" do |chef|
-    chef.product = 'chef'
+  config.vm.provision 'shell', privileged: true, path: "#{vagrant_root}/chef/install.sh"
+  config.vm.provision :file, source: "#{vagrant_root}/chef", destination: "/tmp/chef"
+  config.vm.provision 'shell', privileged: true, path: "#{vagrant_root}/chef/configure.sh"
 
-    chef.http_proxy = ENV['http_proxy']
-    chef.https_proxy = ENV['https_proxy']
-    chef.no_proxy = ENV['no_proxy']
-
-    # Specify the local paths where Chef data is stored
-    chef.cookbooks_path = "cookbooks"
-    chef.data_bags_path = "data_bags"
-    chef.nodes_path = "nodes"
-    chef.roles_path = "roles"
-
-    # Add a recipe
-    # chef.add_recipe "apache"
-
-    # Or maybe a role
-    chef.add_role "rails"
-  end
 end

@@ -1,0 +1,6 @@
+{
+  "name": "bionic_beaver_bento",
+  "run_list": [
+    "role[rails]"
+  ]
+}
