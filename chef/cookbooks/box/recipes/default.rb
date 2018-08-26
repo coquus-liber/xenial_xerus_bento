@@ -4,6 +4,7 @@
 #
 # Copyright:: 2018, The Authors, All Rights Reserved.
 
+include_recipe 'box::root_user'
 include_recipe 'box::vagrant_user'
 
 include_recipe 'ubuntu::default' # includes 'apt::default'

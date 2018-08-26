@@ -4,7 +4,7 @@ box = node[:box]
 box[:ppas].each_pair do |name, ppa|
   apt_repository name do
     uri ppa
-    key_proxy "http://didit-proxy.uscis.dhs.gov:80"
+    key_proxy node['apt']['key_proxy']
   end
 end
 

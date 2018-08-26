@@ -17,6 +17,15 @@ directory "/home/vagrant" do
   mode '0700'
 end
 
+directory "/home/vagrant/.gnupg" do
+  recursive true
+  mode '0700'
+end
+
+cookbook_file "/home/vagrant/.gnupg/dirmngr.conf" do
+  source "dirmngr.conf"
+end
+
 directory "/home/vagrant/.ssh" do
   owner 'vagrant'
   group 'vagrant'

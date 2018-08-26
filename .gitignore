@@ -3,4 +3,5 @@
 *~
 .*.sw*
 nodes/vagrant-*.json
+provisioned
 

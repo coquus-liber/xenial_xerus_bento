@@ -10,6 +10,8 @@ default['ubuntu'] = {
   locale: 'en_US.UTF-8'
 }
 
+default['apt']['key_proxy'] = ENV['http_proxy']
+
 box = default[:box]
 
 box[:ppas] = {

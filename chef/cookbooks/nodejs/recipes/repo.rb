@@ -10,6 +10,7 @@ when 'debian'
     components ['main']
     keyserver node['nodejs']['keyserver']
     key node['nodejs']['key']
+    key_proxy node['apt']['key_proxy']
   end
 when 'rhel', 'amazon'
   yum_repository 'node.js' do
