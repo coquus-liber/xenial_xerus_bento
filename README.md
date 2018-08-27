@@ -1,6 +1,6 @@
-## coquus liber (the cook book) bionic beaver bento
+## coquus liber (the cook book) xenial xerus bento
 
-This is setup to be a Developers Vagrant Box Workstation based on the Bionic Beaver Bento box.
+This is setup to be a Developers Vagrant Box Workstation based on the Xenial Xerus Bento box.
 
 Using Chef Recipes, the box installs x-windows and a collection of utilities for software development from the Ubuntu Repositories. 
 
